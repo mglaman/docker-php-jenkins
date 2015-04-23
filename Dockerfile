@@ -1,4 +1,5 @@
 FROM jenkins
+
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
 
@@ -13,10 +14,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 USER jenkins
 
-ENV PATH "$HOME/.composer/vendor/bin:$PATH"
-
-RUN composer global require "phpunit/phpunit=4.6.*" --prefer-source --no-interaction --quiet && \
-composer global require "squizlabs/php_codesniffer=1.4.*" --prefer-source --no-interaction --quiet && \
-composer global require "phploc/phploc=2.0.*" --prefer-source --no-interaction --quiet && \
-composer global require "phpmd/phpmd=1.5.*" --prefer-source --no-interaction --quiet && \
-composer global require "drush/drush=dev-master" --prefer-source --no-interaction --quiet
+RUN composer global require "phpunit/phpunit=4.6.*" --prefer-source --no-interaction && \
+composer global require "squizlabs/php_codesniffer=1.4.*" --prefer-source --no-interaction && \
+composer global require "phploc/phploc=2.0.*" --prefer-source --no-interaction && \
+composer global require "phpmd/phpmd=1.5.*" --prefer-source --no-interaction && \
+composer global require "drush/drush=dev-master" --prefer-source --no-interaction
